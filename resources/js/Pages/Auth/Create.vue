@@ -3,7 +3,7 @@
     <!-- left screen -->
     <div class="col-span-12 md:col-span-6 h-full grid place-content-center gap-2">
 
-        <img src="/assets/svg/login.svg" alt="" class="md:hidden w-[250px] my-3 m-auto" />
+        <img src="/assets/svg/larawind.svg" alt="" class="md:hidden w-[250px] my-3 m-auto" />
         <h1 class="text-center text-4xl text-blue-600">larawind.</h1>
 
         <div class="rounded shadow-md w-[350px] p-7 border">
@@ -59,7 +59,7 @@
 
     <!-- right screen -->
     <div class="hidden md:grid h-full bg-gray-100 place-content-center col-span-6">
-        <img src="/assets/svg/login.svg" alt="" class="w-[400px]" />
+        <img src="/assets/svg/larawind.svg" alt="" class="w-[400px]" />
     </div>
     </div>
 </template>
