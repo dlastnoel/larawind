@@ -10,7 +10,7 @@
 
             <div class="w-full grid grid-cols-12 gap-3">
 
-                <CardIcon class="col-span-12 md:col-span-6 lg:col-span-3 self-start" iconBackground="bg-blue-100" iconColor="text-blue-700" :icon="UsersIcon"
+                <CardIcon class="col-span-12 md:col-span-6 lg:col-span-3 self-start" iconBackground="bg-sky-100" iconColor="text-sky-600" :icon="UsersIcon"
                     title="Users" content="921" />
 
                 <CardIcon class="col-span-12 md:col-span-6 lg:col-span-3 self-start" iconBackground="bg-green-100" iconColor="text-green-700" :icon="BanknotesIcon"
@@ -28,9 +28,9 @@
                         <p class="text-base font-medium text-gray-800">Overview</p>
                         
                         <div class="flex justify-center">
-                            <button class="w-20 px-3 py-2 text-sm font-medium bg-white focus:bg-blue-600 focus:text-white transition-all duration-100 rounded-l-lg text-center">Today</button>
-                            <button class="w-20 px-3 py-2 text-sm font-medium bg-white focus:bg-blue-600 focus:text-white transition-all duration-100 text-center">Weekly</button>
-                            <button class="w-20 px-3 py-2 text-sm font-medium bg-white focus:bg-blue-600 focus:text-white transition-all duration-100 rounded-r-lg text-center">Monthly</button>
+                            <button class="w-20 px-3 py-2 text-sm font-medium bg-white focus:bg-sky-500 focus:text-white transition-all duration-100 rounded-l-lg text-center">Today</button>
+                            <button class="w-20 px-3 py-2 text-sm font-medium bg-white focus:bg-sky-500 focus:text-white transition-all duration-100 text-center">Weekly</button>
+                            <button class="w-20 px-3 py-2 text-sm font-medium bg-white focus:bg-sky-500 focus:text-white transition-all duration-100 rounded-r-lg text-center">Monthly</button>
                         </div>
                     </div>
                 </Card>
@@ -38,7 +38,7 @@
                 <Card class="col-span-3">
                     <div class="flex justify-between items-center">
                         <p class="text-base font-medium text-gray-800">Activity Log</p>
-                        <button class="p-1 rounded-full shadow-sm bg-blue-600 text-white font-medium hover:cursor-pointer hover:bg-blue-700">
+                        <button class="p-1 rounded-full shadow-sm bg-sky-500 text-white font-medium hover:cursor-pointer hover:bg-sky-600">
                             <ChevronRightIcon class="w-3 h-3" />
                         </button>
                     </div>

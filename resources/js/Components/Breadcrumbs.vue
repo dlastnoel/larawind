@@ -9,11 +9,13 @@
     </template>
     <template v-else>
       <template v-for="(item, i) in items" :key="i">
-        <li
-          class="text-lg font-medium text-gray-800 hover:cursor-pointer hover:underline transition-all duration-75"
-        >
-          {{ item.name }}
-        </li>
+        <Link :href="item.href">
+          <li
+            class="text-lg font-medium text-gray-800 hover:cursor-pointer hover:underline transition-all duration-75"
+          >
+            {{ item.name }}
+          </li>
+        </Link>
         <li v-if="i + 1 !== items.length">
           <ChevronRightIcon class="w-4 h-4" />
         </li>

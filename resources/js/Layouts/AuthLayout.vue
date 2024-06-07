@@ -13,7 +13,7 @@
       <!-- headers -->
       <header class="z-10 py-4 bg-white shadow">
         <div
-          class="flex items-center justify-between h-full px-3 text-blue-600"
+          class="flex items-center justify-between h-full px-3 text-sky-500"
         >
           <!-- mobile sidebar hamburger -->
           <button
@@ -24,7 +24,7 @@
           </button>
           <div class="flex justify-center flex-1 lg:mr-32">
             <div
-              class="relative w-full max-w-xl mr-6 focus-within:text-blue-600"
+              class="relative w-full max-w-xl mr-6 focus-within:text-sky-500"
             ></div>
           </div>
 
@@ -80,9 +80,9 @@ import SidebarDesktop from '@/Components/SidebarDesktop.vue'
 import { Bars3Icon, UserCircleIcon } from '@heroicons/vue/24/solid'
 import { UserIcon, Cog6ToothIcon, ArrowLeftEndOnRectangleIcon } from '@heroicons/vue/24/outline'
 
-import { sidebarLinks } from '../utils/constants'
-import { ref } from 'vue'
+import { sidebarLinks } from '@/Utils/constants'
 import { vOnClickOutside } from '@vueuse/components'
+import { ref } from 'vue'
 
 const refBtnProfile = ref(null)
 

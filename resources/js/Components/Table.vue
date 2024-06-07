@@ -6,11 +6,11 @@
                 <tr
                     class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-white dark:text-gray-400 dark:bg-gray-800"
                 >
-                    <slot name="table-header"/>
+                    <slot name="header"/>
                 </tr>
                 </thead>
                 <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                    <slot name="table-body"/>
+                    <slot name="body"/>
                 </tbody>
             </table>
         </div>

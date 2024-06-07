@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -23,12 +24,16 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $status = ['active', 'deactivated', 'terminated'][rand(0,2)];
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
+            'firstname' => fake()->firstName(),
+            'middlename' => rand(0,1) ? fake()->lastName() : '',
+            'lastname' => fake()->lastName(),
+            'suffix' => rand(0,1) ? fake()->suffix() : '',
+            'email' => fake()->email(),
+            'status' => $status,
+            'terminated_at' => $status === 'terminated' ? fake()->dateTimeBetween('-5 years') : '',
             'password' => static::$password ??= Hash::make('password'),
-            'remember_token' => Str::random(10),
         ];
     }
 

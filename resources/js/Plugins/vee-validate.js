@@ -1,8 +1,9 @@
-import { defineRule, configure } from 'vee-validate';
+import { defineRule, configure, validate } from 'vee-validate';
 import { localize } from '@vee-validate/i18n';
 import { required, numeric, length, between,
-        min, max, min_value, max_value, confirmed,
-        email } from '@vee-validate/rules';
+    min, max, min_value, max_value, confirmed,
+    email } from '@vee-validate/rules';
+
 
 defineRule('required_if', (value, [target, data], ctx) => {
     if (ctx.form[target] === data) {
@@ -16,7 +17,49 @@ defineRule('required_if', (value, [target, data], ctx) => {
     }
 
     return true
-});
+})
+
+
+// defineRule('password', (value, ctx) => {
+
+//     let isValid = true
+//     const validState = {
+//         length: true,
+//         lowercase: true,
+//         uppercase: true,
+//         specialCharacter: true,
+//         number: true
+//     }
+
+//     if(!value) {
+//         return `${ctx.field} is required.`
+//     }
+
+//     if(value.length < 8) {
+//         validState.length = false
+//         isValid = false
+//     }
+
+//     if(!('/[^a-zA-Z0-9_]/').test(value)) {
+//         validState.lowercase = false
+//         isValid = false
+//     }
+
+//     if(!('/[a-z]/').test('value')) {
+//         validState.uppercase = false
+//         isValid = false
+//     }
+
+//     if(!('/[A-Z]/').test('value')) {
+//         validState.specialCharacter = false
+//         isValid = false
+//     }
+
+//     if(!('/\d/').test('value')) {
+//         validState.number = false
+//         isValid = false
+//     }
+// })
 
 
 defineRule('required', required);
