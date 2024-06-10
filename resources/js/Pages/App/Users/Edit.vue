@@ -7,7 +7,7 @@
                     href: route('users.index')
                 },
                 {
-                    name: 'Create',
+                    name: displayName(user.data),
                     href: '#'
                 },
             ]" />
@@ -140,65 +140,12 @@
                                 
                             </Field>
                         </div>
-                        <div class="col-span-12 md:col-span-6 relative">
-                            <InputLabel for="password">Password</InputLabel>
-                            <Field 
-                                v-slot="{ field, errorMessage }"
-                                name="password"
-                                label="Password"
-                                rules="required"
-                                v-model="form.password"
-                            >
-                                <InputText
-                                    :type="isPasswordVisible ? 'text' : 'password'"
-                                    name="password"
-                                    id="password"
-                                    placeholder="Password"
-                                    v-bind="field"
-                                    :value="field.value" />
-
-                                <EyeIcon v-if="isPasswordVisible" @click="isPasswordVisible = !isPasswordVisible"
-                                    class="w-4 h-4 absolute top-9 right-2 cursor-pointer" />
-
-                                <EyeSlashIcon v-if="!isPasswordVisible" @click="isPasswordVisible = !isPasswordVisible"
-                                    class="w-4 h-4 absolute top-9 right-2 cursor-pointer" />
-                                
-                                <InputError :message="errorMessage" />
-                                
-                            </Field>
-                        </div>
-                        <div class="col-span-12 md:col-span-6 relative">
-                            <InputLabel for="password_confirmation">Password Confirmation</InputLabel>
-                            <Field 
-                                v-slot="{ field, errorMessage }"
-                                name="password_confirmation"
-                                label="Password Confirmation"
-                                rules="required|confirmed:password"
-                                v-model="form.password_confirmation"
-                            >
-                                <InputText
-                                    :type="isPasswordConfirmation ? 'text' : 'password'"
-                                    name="password_confirmation"
-                                    id="password_confirmation"
-                                    placeholder="Password Confirmation"
-                                    v-bind="field"
-                                    :value="field.value" />
-
-                                <EyeIcon v-if="isPasswordConfirmation" @click="isPasswordConfirmation = !isPasswordConfirmation"
-                                    class="w-4 h-4 absolute top-9 right-2 cursor-pointer" />
-
-                                <EyeSlashIcon v-if="!isPasswordConfirmation" @click="isPasswordConfirmation = !isPasswordConfirmation"
-                                    class="w-4 h-4 absolute top-9 right-2 cursor-pointer" />
-                                
-                                <InputError :message="errorMessage" />
-                                
-                            </Field>
-                        </div>
                     </FormBody>
                     <FormFooter>
-                        <ButtonPrimary type="submit" :disabled="form.processing">Create</ButtonPrimary>
+                        <ButtonPrimary type="submit" :disabled="form.processing">Update</ButtonPrimary>
                     </FormFooter>
                 </Form>
+
             </FormWrapper>
         </PageBody>
     </AuthLayout>
@@ -218,29 +165,28 @@ import InputText from '@/Components/InputText.vue'
 import InputError from '@/Components/InputError.vue'
 import InputSelect from '@/Components/InputSelect.vue'
 
-import { EyeIcon, EyeSlashIcon } from '@heroicons/vue/24/solid'
-
 import { ref } from 'vue'
 import { Form, Field } from 'vee-validate'
 import { useForm } from '@inertiajs/vue3'
 import { roles } from '@/Utils/forms'
 import useToast from '@/Composables/useToast'
+import { displayName } from '@/Helpers/displayHelpers'
 
 // props
 const props = defineProps({
-    errors: Object
+    errors: Object,
+    user: Object
 })
 
 // data
 const form = useForm({
-    firstname: '',
-    middlename: '',
-    lastname: '',
-    suffix: '',
-    email: '',
-    role: '',
-    password: '',
-    password_confirmation: '',
+    id: props.user.data.id,
+    firstname: props.user.data.firstname,
+    middlename: props.user.data.middlename,
+    lastname: props.user.data.lastname,
+    suffix: props.user.data.suffix,
+    email: props.user.data.email,
+    role: props.user.data.role.name,
 })
 
 const formOptions = {
@@ -253,18 +199,18 @@ const isPasswordConfirmation = ref(false)
 // methods
 function handleSubmit(values, actions) {
 
-    form.post(route('users.store'), {
+    form.put(route('users.update', { user: props.user.data.id }), {
 
         preserveState: true,
         preserveScroll: true,
         
         onError: (errors) => {
             actions.setErrors(errors)
-            useToast('error', 'Error creating user.')
+            useToast('error', 'Error updating user.')
         },
 
         onSuccess: () => {
-            useToast('info', 'User created successfully.')
+            useToast('info', 'User updated successfully.')
         }
     })
 }

@@ -170,11 +170,13 @@
                         </TableData>
                         <TableData>
                             <div class="flex items-center space-x-4 text-sm">
-                                <button
-                                    class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-sky-500 rounded-lg focus:outline-none focus:shadow-outline-gray"
-                                >
-                                    <PencilIcon class="w-5 h-5" />
-                                </button>
+                                <Link :href="route('users.edit', { user: user.id })">
+                                    <button
+                                        class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-sky-500 rounded-lg focus:outline-none focus:shadow-outline-gray"
+                                    >
+                                        <PencilIcon class="w-5 h-5" />
+                                    </button>
+                                </Link>
                             </div>
                         </TableData>
                     </TableRow>
