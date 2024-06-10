@@ -5,6 +5,7 @@ use App\Http\Controllers\Web\AuthenticationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\UserController;
+use App\Http\Controllers\Web\UserStatusController;
 
 
 Route::get('/', [HomeController::class,'index'])
@@ -40,3 +41,6 @@ Route::controller(UserController::class)->group(function () {
     Route::put('/users/{user}', 'update')
         ->name('users.update');
 });
+
+Route::put('/users/{user}/status', [UserStatusController::class, 'update'])
+    ->name('users-status.update');
