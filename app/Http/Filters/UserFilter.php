@@ -37,13 +37,13 @@ class UserFilter implements Filterable {
 
             ->withWhereHas('roles', function($query) use ($request) {
 
-                $query->when($request->input('role') !== 'all', function($query) use ($request) {
+                $query->when($request->input('role', 'all') !== 'all', function($query) use ($request) {
 
                     $query->where('name', $request->input('name'));
                 });
             })
 
-            ->when($request->input('status') && $request->input('status') !== 'all', function($query) use ($request) {
+            ->when($request->input('status', 'all') !== 'all', function($query) use ($request) {
 
                 $query->where('status', $request->input('status'));
             });
