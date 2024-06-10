@@ -223,7 +223,7 @@ import { EyeIcon, EyeSlashIcon } from '@heroicons/vue/24/solid'
 import { ref } from 'vue'
 import { Form, Field } from 'vee-validate'
 import { useForm } from '@inertiajs/vue3'
-import { formValues } from '@/Utils/constants'
+import { roles } from '@/Utils/forms'
 import useToast from '@/Composables/useToast'
 
 // props
@@ -244,7 +244,7 @@ const form = useForm({
 })
 
 const formOptions = {
-    roles: formValues.roles
+    roles: roles
 }
 
 const isPasswordVisible = ref(false)
