@@ -20,48 +20,6 @@ defineRule('required_if', (value, [target, data], ctx) => {
 })
 
 
-// defineRule('password', (value, ctx) => {
-
-//     let isValid = true
-//     const validState = {
-//         length: true,
-//         lowercase: true,
-//         uppercase: true,
-//         specialCharacter: true,
-//         number: true
-//     }
-
-//     if(!value) {
-//         return `${ctx.field} is required.`
-//     }
-
-//     if(value.length < 8) {
-//         validState.length = false
-//         isValid = false
-//     }
-
-//     if(!('/[^a-zA-Z0-9_]/').test(value)) {
-//         validState.lowercase = false
-//         isValid = false
-//     }
-
-//     if(!('/[a-z]/').test('value')) {
-//         validState.uppercase = false
-//         isValid = false
-//     }
-
-//     if(!('/[A-Z]/').test('value')) {
-//         validState.specialCharacter = false
-//         isValid = false
-//     }
-
-//     if(!('/\d/').test('value')) {
-//         validState.number = false
-//         isValid = false
-//     }
-// })
-
-
 defineRule('required', required);
 defineRule('numeric', numeric);
 defineRule('length', length);

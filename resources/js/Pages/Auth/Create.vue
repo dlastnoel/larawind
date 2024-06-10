@@ -11,7 +11,8 @@
             <h3 class="text-3xl font-medium text-gray-800 mt-4">Welcome back!</h3>
             <p class="text-base text-gray-800 mt-3">Login to access your account.</p>
             
-            <Form class="mt-5 grid place-content-center gap-7">
+            <Form @submit="handleSubmit"
+                class="mt-5 grid place-content-center gap-7">
                 <div>
                 <InputLabel for="email">Email Address</InputLabel>
                 <Field
@@ -55,9 +56,7 @@
                 </Field>
                 </div>
                 <div>
-                <Link :href="route('users.index')">
-                    <ButtonPrimary class="w-full"> Login </ButtonPrimary>
-                </Link>
+                <ButtonPrimary class="w-full" :disabled="form.processing">Login</ButtonPrimary>
                 </div>
             </Form>
 
@@ -79,10 +78,34 @@ import InputError from '@/Components/InputError.vue'
 
 import { Form, Field } from 'vee-validate'
 import { appName } from '@/Utils/constants'
+import { useForm } from '@inertiajs/vue3'
+import useToast from '@/Composables/useToast'
 
-const form = {
-    email: '',
-    password: '',
+const props = defineProps({
+    errors: Object
+})
+
+//  data
+const form = useForm({
+    email: 'admin@larawind.com',
+    password: 'password',
+})
+
+// methods
+function handleSubmit(value, actions) {
+
+    form.post(route('auth.store'), {
+
+        onError: (errors) => {
+            actions.setErrors(errors)
+            console.log(errors)
+            useToast('error', 'Invalid login.')
+        },
+
+        onSuccess: () => {
+            useToast('info', 'Login successful!')
+        }
+    })
 }
 
 </script>

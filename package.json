@@ -25,6 +25,8 @@
         "@vueuse/components": "^10.10.0",
         "@vueuse/core": "^10.10.0",
         "moment": "^2.30.1",
-        "vee-validate": "^4.13.0"
+        "sweetalert2": "^11.11.1",
+        "vee-validate": "^4.13.0",
+        "vue-sweetalert2": "^5.0.11"
     }
 }

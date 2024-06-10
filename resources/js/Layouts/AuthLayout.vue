@@ -38,7 +38,7 @@
                 @click="isProfileDropdownVisible = !isProfileDropdownVisible">
                 <UserCircleIcon class="w-5 h-5 text-gray-500 hover:text-gray-800 hover:cursor-pointer transition-all duration-100" />
                 <span class="text-base text-gray-800 font-semibold">
-                  John Doe
+                  {{ displayName($page.props.auth.user.data) }}
                 </span>
               </button>
               <ul v-if="isProfileDropdownVisible"
@@ -53,9 +53,10 @@
                   <Cog6ToothIcon class="w-4 h-4" />
                   <span class="text-sm font-medium">Settings</span>
                 </li>
-                <li class="w-full rounded-lg p-3 flex justify-start items-center gap-2 text-gray-800 transition-all duration-100 hover:cursor-pointer hover:bg-gray-100">
+                <li @click.prevent="handleLogout()"
+                  class="w-full rounded-lg p-3 flex justify-start items-center gap-2 text-gray-800 transition-all duration-100 hover:cursor-pointer hover:bg-gray-100">
                   <ArrowLeftEndOnRectangleIcon class="w-4 h-4" />
-                  <span class="text-sm font-medium">Profile</span>
+                  <span class="text-sm font-medium">Logout</span>
                 </li>
               </ul>
             </li>
@@ -83,15 +84,33 @@ import { UserIcon, Cog6ToothIcon, ArrowLeftEndOnRectangleIcon } from '@heroicons
 import { sidebarLinks } from '@/Utils/constants'
 import { vOnClickOutside } from '@vueuse/components'
 import { ref } from 'vue'
+import { useForm } from '@inertiajs/vue3'
+import { displayName } from '@/Helpers/displayHelpers'
+import useToast from '@/Composables/useToast'
 
+// data
 const refBtnProfile = ref(null)
 
 const isSidebarForMobileVisible = ref(false)
 const isProfileDropdownVisible = ref(false) 
 
+const form = useForm({})
+
+// methods
 function autocloseProfileDropdown() {
   isProfileDropdownVisible.value = false
 }
+
+function handleLogout() {
+
+  form.delete(route('auth.destroy'), {
+
+    onSuccess: () => {
+      useToast('info', 'Logout successful.')
+    }
+  })
+}
+
 </script>
 
 <style>
