@@ -43,7 +43,6 @@ class UserController extends Controller
      */
     public function store(StoreUserFormRequest $request)
     {
-        dd('valid');
         $user = User::create($request->except('role'));
         $user->assignRole($request->validated('role'));
 

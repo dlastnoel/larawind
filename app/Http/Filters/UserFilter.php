@@ -18,7 +18,7 @@ class UserFilter implements Filterable {
 
             switch ($request->input('sort_by')) {
 
-                case 'Last Name':
+                case 'last name':
                     $sortBy = ['lastname', 'firstname'];
                     break;
 
@@ -28,11 +28,19 @@ class UserFilter implements Filterable {
             }
         }
 
-        $users = User::with('roles')
+        $users = User::query()
 
             ->when($request->input('query'), function($query) use ($request) {
 
                 $query->filter($request->input('query'));
+            })
+
+            ->withWhereHas('roles', function($query) use ($request) {
+
+                $query->when($request->input('role') !== 'all', function($query) use ($request) {
+
+                    $query->where('name', $request->input('name'));
+                });
             })
 
             ->when($request->input('status') && $request->input('status') !== 'all', function($query) use ($request) {

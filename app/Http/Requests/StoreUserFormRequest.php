@@ -29,15 +29,7 @@ class StoreUserFormRequest extends FormRequest
             'suffix' => 'nullable|string',
             'email' => 'required|email|unique:users,email',
             'role' => 'required',
-            'password' => [
-                'required',
-                'confirmed',
-                Password::min(8)
-                    ->letters()
-                    ->mixedCase()
-                    ->numbers()
-                    ->symbols()
-            ],
+            'password' => 'required|min:8|confirmed'
         ];
     }
 }

@@ -7,7 +7,7 @@ trait Sortable {
 
     public static function direction(Request $request) {
 
-        if($request->input('direction') && $request->input('direction') === 'Descending') {
+        if($request->input('direction') && $request->input('direction') === 'descending') {
             
             return 'DESC';
         }

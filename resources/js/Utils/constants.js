@@ -13,24 +13,7 @@ const sidebarLinks = [
   },
 ]
 
-const filterValues = {
-  directions: [
-    'ascending',
-    'descending'
-  ],
-  sizes: [10,20,50],
-}
-
-const formValues = {
-  roles: [
-    'admin',
-    'user'
-  ]
-}
-
 export {
   sidebarLinks,
   appName,
-  filterValues,
-  formValues,
 }

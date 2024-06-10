@@ -140,7 +140,7 @@
                                 
                             </Field>
                         </div>
-                        <div class="col-span-12 md:col-span-6">
+                        <div class="col-span-12 md:col-span-6 relative">
                             <InputLabel for="password">Password</InputLabel>
                             <Field 
                                 v-slot="{ field, errorMessage }"
@@ -150,18 +150,24 @@
                                 v-model="form.password"
                             >
                                 <InputText
-                                    type="password"
+                                    :type="isPasswordVisible ? 'text' : 'password'"
                                     name="password"
                                     id="password"
                                     placeholder="Password"
                                     v-bind="field"
                                     :value="field.value" />
+
+                                <EyeIcon v-if="isPasswordVisible" @click="isPasswordVisible = !isPasswordVisible"
+                                    class="w-4 h-4 absolute top-9 right-2 cursor-pointer" />
+
+                                <EyeSlashIcon v-if="!isPasswordVisible" @click="isPasswordVisible = !isPasswordVisible"
+                                    class="w-4 h-4 absolute top-9 right-2 cursor-pointer" />
                                 
                                 <InputError :message="errorMessage" />
                                 
                             </Field>
                         </div>
-                        <div class="col-span-12 md:col-span-6">
+                        <div class="col-span-12 md:col-span-6 relative">
                             <InputLabel for="password_confirmation">Password Confirmation</InputLabel>
                             <Field 
                                 v-slot="{ field, errorMessage }"
@@ -171,12 +177,18 @@
                                 v-model="form.password_confirmation"
                             >
                                 <InputText
-                                    type="password"
+                                    :type="isPasswordConfirmation ? 'text' : 'password'"
                                     name="password_confirmation"
                                     id="password_confirmation"
                                     placeholder="Password Confirmation"
                                     v-bind="field"
                                     :value="field.value" />
+
+                                <EyeIcon v-if="isPasswordConfirmation" @click="isPasswordConfirmation = !isPasswordConfirmation"
+                                    class="w-4 h-4 absolute top-9 right-2 cursor-pointer" />
+
+                                <EyeSlashIcon v-if="!isPasswordConfirmation" @click="isPasswordConfirmation = !isPasswordConfirmation"
+                                    class="w-4 h-4 absolute top-9 right-2 cursor-pointer" />
                                 
                                 <InputError :message="errorMessage" />
                                 
@@ -206,9 +218,13 @@ import InputText from '@/Components/InputText.vue'
 import InputError from '@/Components/InputError.vue'
 import InputSelect from '@/Components/InputSelect.vue'
 
+import { EyeIcon, EyeSlashIcon } from '@heroicons/vue/24/solid'
+
+import { ref } from 'vue'
 import { Form, Field } from 'vee-validate'
 import { useForm } from '@inertiajs/vue3'
 import { formValues } from '@/Utils/constants'
+import useToast from '@/Composables/useToast'
 
 // props
 const props = defineProps({
@@ -231,6 +247,9 @@ const formOptions = {
     roles: formValues.roles
 }
 
+const isPasswordVisible = ref(false)
+const isPasswordConfirmation = ref(false)
+
 // methods
 function handleSubmit(values, actions) {
 
@@ -241,6 +260,11 @@ function handleSubmit(values, actions) {
         
         onError: (errors) => {
             actions.setErrors(errors)
+            useToast('error', 'Error creating user.')
+        },
+
+        onSuccess: () => {
+            useToast('info', 'User created successfully.')
         }
     })
 }

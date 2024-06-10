@@ -15,7 +15,7 @@
         </PageHeader>
         <PageBody>
             <Filter>
-                <Form @submit="handleFilter()"
+                <Form @submit="handleFilter"
                     class="grid grid-cols-12 gap-2">
                     <div class="col-span-4">
                     <Field
@@ -35,7 +35,7 @@
                         />
                     </Field>
                     </div>
-                    <div class="col-span-2">
+                    <div class="col-span-4">
                         <Field
                             v-slot="{ field }"
                             name="status"
@@ -43,20 +43,41 @@
                             v-model="filterForm.status"
                         >
                             <InputLabel for="status">Status</InputLabel>
-                            <InputSelect
+                            <InputSelect class="capitalize"
                             name="status"
                             id="status"
                             v-bind="field"
                             :value="field.value"
                             >
-                                <option value="all" class="capitalize">All</option>
-                                <option value="active" class="capitalize">Active</option>
-                                <option value="deactivated" class="capitalize">Deactivated</option>
-                                <option value="terminated" class="capitalize">Terminated</option>
+                                <option v-for="(status, i) in filterOptions.statuses" :key="i"
+                                    :value="status">
+                                    {{ status}}
+                                </option>
                             </InputSelect>
                         </Field>
                     </div>
-                    <div class="col-span-2">
+                    <div class="col-span-4">
+                        <Field
+                            v-slot="{ field }"
+                            name="role"
+                            label="Role"
+                            v-model="filterForm.role"
+                        >
+                            <InputLabel for="role">Role</InputLabel>
+                            <InputSelect class="capitalize"
+                            name="role"
+                            id="role"
+                            v-bind="field"
+                            :value="field.value"
+                            >
+                                <option v-for="(role, i) in filterOptions.roles" :key="i"
+                                    :value="role">
+                                    {{ role }}
+                                </option>
+                            </InputSelect>
+                        </Field>
+                    </div>
+                    <div class="col-span-4">
                         <Field
                             v-slot="{ field }"
                             name="sort_by"
@@ -71,13 +92,13 @@
                             v-bind="field"
                             :value="field.value"
                             >
-                                <option value="first name">first Name</option>
-                                <option value="last name">last Name</option>
-                                <option value="status">status</option>
+                                <option value="first name">First Name</option>
+                                <option value="last name">Last Name</option>
+                                <option value="status">Status</option>
                             </InputSelect>
                         </Field>
                     </div>
-                    <div class="col-span-2">
+                    <div class="col-span-4">
                     <Field
                         v-slot="{ field }"
                         name="direction"
@@ -97,7 +118,7 @@
                         </InputSelect>
                     </Field>
                     </div>
-                    <div class="col-span-2">
+                    <div class="col-span-4">
                     <Field
                         v-slot="{ field }"
                         name="size"
@@ -118,7 +139,7 @@
                     </Field>
                     </div>
                     <FilterFooter>
-                    <ButtonMuted @click="handleResetFilter()">Reset</ButtonMuted>
+                    <ButtonMuted type="reset" @click.prevent="handleResetFilter()">Reset</ButtonMuted>
                     <ButtonPrimary type="submit">Filter</ButtonPrimary>
                     </FilterFooter>
                 </Form>
@@ -189,7 +210,7 @@ import { PencilIcon, TrashIcon } from '@heroicons/vue/24/solid'
 import { ref } from 'vue'
 import { displayName } from '@/Helpers/displayHelpers'
 import { Form, Field } from 'vee-validate'
-import { filterValues } from '@/Utils/constants'
+import { filterRoles, filterStatuses, filterSizes, filterDirections, } from '@/Utils/filters'
 import { useForm } from '@inertiajs/vue3'
 
 // props
@@ -200,19 +221,20 @@ const props = defineProps({
 
 
 // data
-const isFilterVisible = ref(true)
-
 const filterForm = useForm({
     query: '',
     status: props.filters.status ?? 'all',
+    role: props.filters.role ?? 'all',
     sort_by: props.filters.sort_by ?? 'first name',
     direction: props.filters.direction ?? 'ascending',
     size: props.filters.size ?? 10
 })
 
 const filterOptions = {
-    directions: filterValues.directions,
-    sizes: filterValues.sizes,
+    directions: filterDirections,
+    sizes: filterSizes,
+    statuses: filterStatuses,
+    roles: filterRoles
 }
 
 
@@ -229,6 +251,7 @@ function handleFilter() {
 function handleResetFilter() {
     filterForm.query = ''
     filterForm.status = 'all'
+    filterForm.role = 'all'
     filterForm.sort_by = 'first name'
     filterForm.direction = 'ascending'
     filterForm.size = 10
