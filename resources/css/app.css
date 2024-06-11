@@ -5,3 +5,41 @@
 *, html, body {
     font-family: 'Poppins', sans-serif !important;
 }
+
+.notyf__toast {
+    border-radius: 7px !important;
+    max-width: 600px !important;
+}
+
+.notyf__icon--info {
+    height: 21px;
+    width: 21px;
+    background: white;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+    position: relative;
+}
+
+.notyf__icon--info:after, .notyf__icon--info:before {
+    content: "";
+    background: currentColor;
+    display: block;
+    position: absolute;
+    width: 3px;
+    border-radius: 3px;
+}
+
+.notyf__icon--info:after {
+height: 6px;
+transform: rotate(-45deg);
+top: 9px;
+left: 6px;
+}
+
+.notyf__icon--info:before {
+height: 11px;
+transform: rotate(45deg);
+top: 5px;
+left: 10px;
+}

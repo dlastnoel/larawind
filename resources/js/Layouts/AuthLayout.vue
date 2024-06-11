@@ -86,7 +86,6 @@ import { vOnClickOutside } from '@vueuse/components'
 import { ref } from 'vue'
 import { useForm } from '@inertiajs/vue3'
 import { displayName } from '@/Helpers/displayHelpers'
-import useToast from '@/Composables/useToast'
 
 // data
 const refBtnProfile = ref(null)
@@ -103,12 +102,7 @@ function autocloseProfileDropdown() {
 
 function handleLogout() {
 
-  form.delete(route('auth.destroy'), {
-
-    onSuccess: () => {
-      useToast('info', 'Logout successful.')
-    }
-  })
+  form.delete(route('auth.destroy'))
 }
 
 </script>

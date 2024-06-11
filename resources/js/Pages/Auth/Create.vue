@@ -15,6 +15,7 @@
                     class="mt-5 grid place-content-center gap-7">
                     <div>
                         <InputLabel for="email">Email Address</InputLabel>
+
                         <Field
                             v-slot="{ field, errorMessage }"
                             name="email"
@@ -90,7 +91,7 @@ import { ref } from 'vue'
 import { Form, Field } from 'vee-validate'
 import { appName } from '@/Utils/constants'
 import { useForm } from '@inertiajs/vue3'
-import useToast from '@/Composables/useToast'
+import useNotyf from '@/Composables/useNotyf'
 
 const props = defineProps({
     errors: Object
@@ -109,14 +110,14 @@ function handleSubmit(value, actions) {
 
     form.post(route('auth.store'), {
 
+        
         onError: (errors) => {
             actions.setErrors(errors)
-            console.log(errors)
-            useToast('error', 'Invalid login.')
+            useNotyf('error')
         },
 
         onSuccess: () => {
-            useToast('info', 'Login successful!')
+            useNotyf('info', 'Welcome!')
         }
     })
 }

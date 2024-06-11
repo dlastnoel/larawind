@@ -169,7 +169,7 @@ import { ref } from 'vue'
 import { Form, Field } from 'vee-validate'
 import { useForm } from '@inertiajs/vue3'
 import { roles } from '@/Utils/forms'
-import useToast from '@/Composables/useToast'
+import useNotyf from '@/Composables/useNotyf'
 import { displayName } from '@/Helpers/displayHelpers'
 
 // props
@@ -206,11 +206,11 @@ function handleSubmit(values, actions) {
         
         onError: (errors) => {
             actions.setErrors(errors)
-            useToast('error', 'Error updating user.')
+            useNotyf('error')
         },
 
         onSuccess: () => {
-            useToast('info', 'User updated successfully.')
+            useNotyf('info')
         }
     })
 }

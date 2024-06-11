@@ -252,7 +252,7 @@ import { displayName } from '@/Helpers/displayHelpers'
 import { Form, Field } from 'vee-validate'
 import { filterRoles, filterStatuses, filterSizes, filterDirections, } from '@/Utils/filters'
 import { useForm } from '@inertiajs/vue3'
-import useToast from '@/Composables/useToast'
+import useNotyf from '@/Composables/useNotyf'
 import { statuses } from '@/Utils/forms'
 
 // props
@@ -311,7 +311,7 @@ function handleResetFilter() {
 function setStatus(user) {
 
     if(user.status === 'terminated') {
-        useToast('error', 'Not allowed.')
+        useNotyf('error', 'Not allowed.')
         return
     }
 
@@ -343,7 +343,7 @@ function handleSubmit() {
 
         onSuccess: () => {
 
-            useToast('info', 'User status updated successfully.')
+            useNotyf('info')
             resetStatus()
         }
     })
