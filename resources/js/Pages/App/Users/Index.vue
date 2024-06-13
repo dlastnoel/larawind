@@ -157,16 +157,14 @@
                 <template v-slot:body>
                     <TableRow v-for="(user, i) in users.data" :key="i">
                         <TableData>
-                            <span class="text-sm font-medium text-gray-800">{{ displayName(user) }}</span>
+                            <span class="text-sm text-gray-800">{{ displayName(user) }}</span>
                         </TableData>
                         <TableData>
-                            <span class="text-sm font-medium text-gray-800">{{ user.role.name }}</span>
+                            <span class="text-sm text-gray-800">{{ user.role.name }}</span>
                         </TableData>
                         <TableData>
-                            <span class="text-sm font-medium text-gray-800">
-                                <StatusChip @click="setStatus(user)"
-                                    :status="user.status" />
-                            </span>
+                            <UserStatusChip @click="setStatus(user)"
+                                :status="user.status" />
                         </TableData>
                         <TableData>
                             <div class="flex items-center space-x-4 text-sm">
@@ -236,7 +234,7 @@ import TableHeader from '@/Components/TableHeader.vue'
 import TableRow from '@/Components/TableRow.vue'
 import TableData from '@/Components/TableData.vue'
 import Pagination from '@/Components/Pagination.vue'
-import StatusChip from  '@/Components/StatusChip.vue'
+import UserStatusChip from  '@/Components/UserStatusChip.vue'
 import InputText from '@/Components/InputText.vue'
 import InputLabel from '@/Components/InputLabel.vue'
 import InputSelect from '@/Components/InputSelect.vue'
