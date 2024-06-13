@@ -2,7 +2,7 @@ import { defineRule, configure, validate } from 'vee-validate';
 import { localize } from '@vee-validate/i18n';
 import { required, numeric, length, between,
     min, max, min_value, max_value, confirmed,
-    email } from '@vee-validate/rules';
+    email, image, ext } from '@vee-validate/rules'
 
 
 defineRule('required_if', (value, [target, data], ctx) => {
@@ -20,16 +20,18 @@ defineRule('required_if', (value, [target, data], ctx) => {
 })
 
 
-defineRule('required', required);
-defineRule('numeric', numeric);
-defineRule('length', length);
-defineRule('between', between);
-defineRule('min', min);
-defineRule('max', max);
-defineRule('min_value', min_value);
-defineRule('max_value', max_value);
-defineRule('confirmed', confirmed);
+defineRule('required', required)
+defineRule('numeric', numeric)
+defineRule('length', length)
+defineRule('between', between)
+defineRule('min', min)
+defineRule('max', max)
+defineRule('min_value', min_value)
+defineRule('max_value', max_value)
+defineRule('confirmed', confirmed)
 defineRule('email', email);
+defineRule('image', image)
+defineRule('ext', ext)
 
 
 configure({

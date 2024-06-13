@@ -24,7 +24,12 @@ class UserProfileController extends Controller
      */
     public function update(UpdateUserProfileFormRequest $request)
     {
-        $request->user()->fill($request->validated());
+        $request->user()->fill($request->except('avatar'));
+
+        if($request->hasFile('avatar')) {
+
+            $request->user()->addMedia($request->file('avatar'))->toMediaCollection('user_avatars');
+        }
 
         $request->user()->save();
 

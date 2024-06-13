@@ -1,4 +1,4 @@
-<template>
+    <template>
     <AuthLayout>
         <PageHeader>
             <Breadcrumbs :items="[
@@ -9,9 +9,42 @@
             ]" />
         </PageHeader>
         <PageBody>
-            <FormWrapper name="User Profile" description="This information will be displayed publicly so be careful what you share.">
-                <Form @submit="handleUserProfileSubmit">
+            <FormWrapper name="Profile" description="This information will be displayed publicly so be careful what you share.">
+                <Form @submit="handleUserProfileSubmit" enctype="multipart/form-data">
                     <FormBody>
+                        <div class="col-span-12 md:col-span-6">
+                            <div class="p-3 border-2 border-dashed rounded-lg">
+                                <InputLabel for="avatar">Avatar</InputLabel>
+                                <div class="flex justify-start items-center gap-3">
+                                    <img v-if="previewAvatar"
+                                        :src="previewAvatar" class="rounded-full w-12 h-12" alt="Avatar" />
+                                    <UserCircleIcon v-else
+                                        class="w-12 h-12 text-gray-300" />
+                                    <div>
+                                        <span class="sr-only">Choose avatar</span>
+                                        <Field as="input"
+                                            v-slot="{ errorMessage }"
+                                            type="file"
+                                            name="avatar"
+                                            label="Avatar"
+                                            rules="ext:jpg,png"
+                                            v-model="userProfileForm.avatar"
+                                            class="block w-full text-sm file:px-3 file:py-2
+                                                file:rounded-full file:border-0 file:text-sm file:font-semibold
+                                                file:bg-sky-100 file:text-sky-600
+                                                hover:file:bg-sky-200 hover:cursor-pointer file:transition-all file:duration-75"
+                                        >   
+                                            <InputError :message="errorMessage" />
+                                            
+                                        </Field>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-span-6 hidden md:block">
+                            <!--  -->
+                        </div>
+
                         <div class="col-span-12 md:col-span-6">
                             <InputLabel for="firstname">First Name</InputLabel>
                             <Field 
@@ -200,10 +233,10 @@ import InputText from '@/Components/InputText.vue'
 import InputLabel from '@/Components/InputLabel.vue'
 import InputError from '@/Components/InputError.vue'
 
-import { EyeIcon, EyeSlashIcon } from '@heroicons/vue/24/solid'
+import { EyeIcon, EyeSlashIcon, UserCircleIcon } from '@heroicons/vue/24/solid'
 
 import { Form, Field } from 'vee-validate'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useForm, usePage } from '@inertiajs/vue3'
 import useNotyf from '@/Composables/useNotyf'
 
@@ -211,6 +244,7 @@ import useNotyf from '@/Composables/useNotyf'
 const page = usePage()
 
 const userProfileForm = useForm({
+    avatar: page.props.auth.user.data.avatar ?? '',
     firstname: page.props.auth.user.data.firstname,
     middlename: page.props.auth.user.data.middlename,
     lastname: page.props.auth.user.data.lastname,
@@ -259,5 +293,14 @@ function handleUserPasswordSubmit(value, actions) {
         },
     })
 }
+
+const previewAvatar = computed(() => {
+
+    if(userProfileForm.avatar) {
+        return URL.createObjectURL(userProfileForm.avatar)
+    }
+
+    return ''
+})
 
 </script>
