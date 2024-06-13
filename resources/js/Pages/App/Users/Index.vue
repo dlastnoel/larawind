@@ -216,7 +216,7 @@
                 </template>
                 <template v-slot:footer>
                     <ButtonMuted @click="resetStatus()">Cancel</ButtonMuted>
-                    <ButtonPrimary @click="handleSubmit()">Update</ButtonPrimary>
+                    <ButtonPrimary @click="handleSubmit()" :disabled="userStatusForm.processing">Update</ButtonPrimary>
                 </template>
             </Modal>
 
