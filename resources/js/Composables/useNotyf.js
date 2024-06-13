@@ -19,7 +19,7 @@ export default function(type = 'info', message = null) {
     }
     
     const notyf = new Notyf({
-        duration: 3000,
+        duration: 2500,
         position: {
           x: 'right',
           y: 'bottom',

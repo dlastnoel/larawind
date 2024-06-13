@@ -2,12 +2,12 @@
     <AuthLayout>
         <PageHeader>
             <Breadcrumbs
-            :items="[
-                {
-                name: 'Users',
-                href: '#',
-                },
-            ]"
+                :items="[
+                    {
+                    name: 'Users',
+                    href: '#',
+                    },
+                ]"
             />
             <Link :href="route('users.create')">
                 <ButtonPrimary>Create</ButtonPrimary>

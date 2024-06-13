@@ -6,10 +6,13 @@ const sidebarLinks = [
   {
     name: 'Dashboard',
     svg: Squares2X2Icon,
+    href: '#'
   },
   {
     name: 'Users',
     svg: UsersIcon,
+    href: route('users.index'),
+    active: route().current('users.*')
   },
 ]
 

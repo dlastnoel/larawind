@@ -7,6 +7,7 @@
     <SidebarMobile
       :sidebarLinks="sidebarLinks"
       v-if="isSidebarForMobileVisible"
+      v-on-click-outside="autoCloseSidebarMobile"
     />
 
     <div class="flex flex-col flex-1 w-full">
@@ -42,13 +43,15 @@
                 </span>
               </button>
               <ul v-if="isProfileDropdownVisible"
-                v-on-click-outside="autocloseProfileDropdown"
+                v-on-click-outside="autoCloseProfileDropdown"
                 class="absolute top-6 right-20 p-3 bg-white rounded shadow w-56">
 
-                <li class="w-full rounded-lg p-3 flex justify-start items-center gap-2 text-gray-800 transition-all duration-100 hover:cursor-pointer hover:bg-gray-100">
-                  <UserIcon class="w-4 h-4" />
-                  <span class="text-sm font-medium">Profile</span>
-                </li>
+                <Link :href="route('user-profile.edit')">
+                  <li class="w-full rounded-lg p-3 flex justify-start items-center gap-2 text-gray-800 transition-all duration-100 hover:cursor-pointer hover:bg-gray-100">
+                    <UserIcon class="w-4 h-4" />
+                    <span class="text-sm font-medium">Profile</span>
+                  </li>
+                </Link>
                 <li class="w-full rounded-lg p-3 flex justify-start items-center gap-2 text-gray-800 transition-all duration-100 hover:cursor-pointer hover:bg-gray-100">
                   <Cog6ToothIcon class="w-4 h-4" />
                   <span class="text-sm font-medium">Settings</span>
@@ -96,8 +99,12 @@ const isProfileDropdownVisible = ref(false)
 const form = useForm({})
 
 // methods
-function autocloseProfileDropdown() {
+function autoCloseProfileDropdown() {
   isProfileDropdownVisible.value = false
+}
+
+function autoCloseSidebarMobile() {
+  isSidebarForMobileVisible.value = false
 }
 
 function handleLogout() {
