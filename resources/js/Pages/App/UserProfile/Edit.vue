@@ -16,7 +16,9 @@
                             <div class="p-3 border-2 border-dashed rounded-lg">
                                 <InputLabel for="avatar">Avatar</InputLabel>
                                 <div class="flex justify-start items-center gap-3">
-                                    <img v-if="previewAvatar"
+                                    <img v-if="page.props.auth.user.data.avatar && !previewAvatar" lazy
+                                        :src="page.props.auth.user.data.avatar" class="rounded-full w-12 h-12" />
+                                    <img v-else-if="previewAvatar"
                                         :src="previewAvatar" class="rounded-full w-12 h-12" alt="Avatar" />
                                     <UserCircleIcon v-else
                                         class="w-12 h-12 text-gray-300" />
@@ -244,7 +246,7 @@ import useNotyf from '@/Composables/useNotyf'
 const page = usePage()
 
 const userProfileForm = useForm({
-    avatar: page.props.auth.user.data.avatar ?? '',
+    avatar: '',
     firstname: page.props.auth.user.data.firstname,
     middlename: page.props.auth.user.data.middlename,
     lastname: page.props.auth.user.data.lastname,

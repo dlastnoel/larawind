@@ -2,7 +2,7 @@
 
 namespace App\Contracts\Queries;
 
-interface Executable {
-
+interface Executable
+{
     public static function execute();
 }

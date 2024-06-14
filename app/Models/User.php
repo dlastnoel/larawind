@@ -47,9 +47,9 @@ class User extends Authenticatable implements HasMedia
             ->height(100);
     }
 
-    public function getAvatarAttribute() {
-        
-        return $this->getFirstMediaUrl('user_avatars');
+    public function getAvatarAttribute()
+    {
+        return $this->getMedia('user_avatars')->sortByDesc('created_at')->first()->getUrl();
     }
 
     public function getRoleAttribute() {
