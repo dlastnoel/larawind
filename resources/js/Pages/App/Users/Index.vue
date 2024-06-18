@@ -194,7 +194,7 @@
                 <template v-slot:body>
                     <div>
                         <InputLabel for="status">Status</InputLabel>
-                        <Field v-slot="{ field, errorMessage}"
+                        <Field v-slot="{ field }"
                             name="status"
                             label="Status"
                             v-model="userStatusForm.status">
@@ -209,8 +209,6 @@
                                     {{ status }}
                                 </option>
                             </InputSelect>
-
-                            <InputError :message="errorMessage" />
                         </Field>
                     </div>
                 </template>

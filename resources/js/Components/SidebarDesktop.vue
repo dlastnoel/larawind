@@ -15,7 +15,8 @@
 </template>
 
 <script setup>
-import { appName, sidebarLinks }  from '@/Utils/constants'
+import { appName }  from '@/Utils/constants'
+import { sidebarLinks }  from '@/Utils/links'
 import SidebarLink from '@/Components/SidebarLink.vue'
 
 </script>

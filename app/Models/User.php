@@ -49,7 +49,9 @@ class User extends Authenticatable implements HasMedia
 
     public function getAvatarAttribute()
     {
-        return $this->getMedia('user_avatars')->sortByDesc('created_at')->first()->getUrl();
+        $media = $this->getMedia('user_avatars')->sortByDesc('created_at')->first();
+        
+        return $media ? $media->getUrl() : '';
     }
 
     public function getRoleAttribute() {

@@ -15,7 +15,7 @@
             </table>
         </div>
         <div v-if="$slots.footer"
-            class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t bg-white sm:grid-cols-9">
+            class="flex justify-between align-center px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 border-t bg-white sm:grid-cols-9">
             <slot name="footer"/>
         </div>
     </div>

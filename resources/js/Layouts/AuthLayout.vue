@@ -1,11 +1,11 @@
 <template>
     <div class="flex h-screen bg-gray-50">
+
         <!-- sidebar desktop -->
-        <SidebarDesktop :sidebarLinks="sidebarLinks" />
+        <SidebarDesktop/>
 
         <!-- sidebar mobile -->
         <SidebarMobile
-        :sidebarLinks="sidebarLinks"
         v-if="isSidebarForMobileVisible"
         v-on-click-outside="autoCloseSidebarMobile"
         />
@@ -97,7 +97,6 @@ import SidebarDesktop from '@/Components/SidebarDesktop.vue'
 import { Bars3Icon, UserCircleIcon } from '@heroicons/vue/24/solid'
 import { UserIcon, Cog6ToothIcon, ArrowLeftEndOnRectangleIcon } from '@heroicons/vue/24/outline'
 
-import { sidebarLinks } from '@/Utils/constants'
 import { vOnClickOutside } from '@vueuse/components'
 import { ref } from 'vue'
 import { useForm } from '@inertiajs/vue3'
